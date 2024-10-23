@@ -37,7 +37,7 @@ import numpy as np
 
 class SpacecraftWrenchModel():
     def __init__(self):
-        self.name = 'spacecraft_direct_allocation_model'
+        self.name = 'spacecraft_wrench_model'
 
         # constants
         self.mass = 15.

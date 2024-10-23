@@ -106,11 +106,6 @@ class SpacecraftMPC(Node):
             '/fmu/out/vehicle_angular_velocity',
             self.vehicle_angular_velocity_callback,
             qos_profile)
-        self.angular_vel_sub = self.create_subscription(
-            VehicleAngularVelocity,
-            '/fmu/out/vehicle_angular_velocity',
-            self.vehicle_angular_velocity_callback,
-            qos_profile)
         self.local_position_sub = self.create_subscription(
             VehicleLocalPosition,
             '/fmu/out/vehicle_local_position',
@@ -125,7 +120,6 @@ class SpacecraftMPC(Node):
         self.publisher_thrust_setpoint = self.create_publisher(VehicleThrustSetpoint, '/fmu/in/vehicle_thrust_setpoint', qos_profile)
         self.publisher_torque_setpoint = self.create_publisher(VehicleTorqueSetpoint, '/fmu/in/vehicle_torque_setpoint', qos_profile)
         self.predicted_path_pub = self.create_publisher(Path, '/px4_mpc/predicted_path', 10)
-        self.reference_pub = self.create_publisher(Marker, "/px4_mpc/reference", 10)
         self.reference_pub = self.create_publisher(Marker, "/px4_mpc/reference", 10)
 
         timer_period = 0.02  # seconds
