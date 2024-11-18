@@ -9,8 +9,7 @@ setup(
     version='0.0.0',
     packages=find_packages(exclude=['test']),
     data_files=[
-        ('share/ament_index/resource_index/packages',
-            ['resource/' + package_name]),
+        ('share/ament_index/resource_index/packages',['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name), glob(os.path.join('px4_mpc/launch', '*launch.[pxy][yma]*'))),
         # (os.path.join('share', package_name), glob('launch/*.[pxy][yma]*')),
@@ -28,6 +27,7 @@ setup(
                 'mpc_quadrotor = px4_mpc.mpc_quadrotor:main',
                 'mpc_spacecraft = px4_mpc.mpc_spacecraft:main',
                 'rviz_pos_marker = px4_mpc.rviz_pos_marker:main',
+                'rviz_pos_markers = px4_mpc.rviz_pos_markers:main',
         ],
     },
 )

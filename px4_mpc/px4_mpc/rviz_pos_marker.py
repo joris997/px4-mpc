@@ -86,14 +86,15 @@ def normalizeQuaternion(quaternion_msg):
     quaternion_msg.w *= s
 
 
-def make6DofMarker(server, menu_handler, process_feedback, fixed, interaction_mode, position, show_6dof=False):
+def make6DofMarker(server, menu_handler, process_feedback, fixed, interaction_mode, position, show_6dof=False,
+                   description=''):
     int_marker = InteractiveMarker()
     int_marker.header.frame_id = 'map'
     int_marker.pose.position = position
     int_marker.scale = 1.0
 
     int_marker.name = 'simple_6dof'
-    int_marker.description = 'Simple 6-DOF Control'
+    int_marker.description = description
 
     # insert a box
     makeBoxControl(int_marker)
@@ -101,7 +102,7 @@ def make6DofMarker(server, menu_handler, process_feedback, fixed, interaction_mo
 
     if fixed:
         int_marker.name += '_fixed'
-        int_marker.description += '\n(fixed orientation)'
+        # int_marker.description += '\n(fixed orientation)'
 
     if interaction_mode != InteractiveMarkerControl.NONE:
         control_modes_dict = {
@@ -158,7 +159,7 @@ class MinimalClientAsync(Node):
 
     def __init__(self):
         super().__init__('minimal_client_async')
-        self.cli = self.create_client(SetPose, '/set_pose')
+        self.cli = self.create_client(SetPose, 'set_pose')
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
         self.req = SetPose.Request()
@@ -195,7 +196,8 @@ class ProcessFeedback():
         # self.menu_handler.insert('Reset Orientation', parent=sub_menu_handle, callback=process_feedback.processFeedback)
 
         position = Point(x=0.0, y=3.0, z=3.0)
-        make6DofMarker(self.server, self.menu_handler, self.processFeedback, True, InteractiveMarkerControl.NONE, position, True)
+        make6DofMarker(self.server, self.menu_handler, self.processFeedback, True, 
+                        InteractiveMarkerControl.NONE, position, True, description=node.get_namespace())
         self.server.applyChanges()
 
     
