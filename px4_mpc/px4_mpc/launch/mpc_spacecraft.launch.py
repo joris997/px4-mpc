@@ -60,12 +60,6 @@ def generate_launch_description():
             output='screen',
             emulate_tty=True,
         ),
-        # Node(
-        #     package='micro_ros_agent',
-        #     executable='micro_ros_agent',
-        #     arguments=['udp4', '-p', '8888'],
-        #     parameters=[{'use_sim_time': 1}],
-        #     output='screen'),
         Node(
             package='px4_offboard',
             namespace='px4_offboard',

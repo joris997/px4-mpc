@@ -76,6 +76,8 @@ def generate_launch_description():
             name='visualizer_0',
         ),
 
+
+
         # Crackle 
         Node(
             package='px4_mpc',
@@ -84,13 +86,6 @@ def generate_launch_description():
             name='rviz_pos_marker_1',
             output='screen',
             emulate_tty=True,
-        ),
-        Node(
-            package='rviz2',
-            namespace='crackle',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', [os.path.join(get_package_share_directory('px4_mpc'), 'config.rviz')]]
         ),
         Node(
             package='px4_mpc',
@@ -108,39 +103,30 @@ def generate_launch_description():
             name='visualizer_1',
         ),
 
-        # PushRosNamespace('crackle'),
-        # Node(
-        #     package='px4_mpc',
-        #     namespace='/crackle/px4_mpc',
-        #     executable='mpc_spacecraft',
-        #     name='mpc_spacecraft_1',
-        #     output='screen',
-        #     emulate_tty=True,
-        #     parameters=[{'mode': 'direct_allocation'}, # rate/wrench/direct_allocation
-        #                 {'vehicle': 'crackle'}], 
-        # ),
-        # Node(
-        #     package='px4_offboard',
-        #     namespace='/crackle/px4_offboard',
-        #     executable='visualizer',
-        #     name='visualizer_1'
-        # )
+       
 
-        # PushRosNamespace('pop'),
-        # Node(
-        #     package='px4_mpc',
-        #     namespace='/pop/px4_mpc',
-        #     executable='mpc_spacecraft',
-        #     name='mpc_spacecraft_2',
-        #     output='screen',
-        #     emulate_tty=True,
-        #     parameters=[{'mode': 'direct_allocation'}, # rate/wrench/direct_allocation
-        #                 {'vehicle': 'pop'}], 
-        # ),
-        # Node(
-        #     package='px4_offboard',
-        #     namespace='/pop/px4_offboard',
-        #     executable='visualizer',
-        #     name='visualizer_2'
-        # )
+       # Pop 
+        Node(
+            package='px4_mpc',
+            namespace='pop',
+            executable='rviz_pos_marker',
+            name='rviz_pos_marker_1',
+            output='screen',
+            emulate_tty=True,
+        ),
+        Node(
+            package='px4_mpc',
+            namespace='pop',
+            executable='mpc_spacecraft',
+            name='mpc_spacecraft_1',
+            output='screen',
+            emulate_tty=True,
+            parameters=[{'mode': 'rate'}], # rate/wrench/direct_allocation
+        ),
+        Node(
+            package='px4_offboard',
+            namespace='pop',
+            executable='visualizer',
+            name='visualizer_1',
+        ),
     ])
